@@ -1,0 +1,58 @@
+.navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0, 97%, 57%);
+    color: hsl(0, 0%, 0%);
+    gap: 2rem; 
+    padding: 0 30rem;
+}
+
+.navbar ul{
+    flex: 1;
+    list-style: none;
+    text-align: center;
+}
+
+.navbar a{
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: .25rem;
+}
+
+.clickable_icon:hover{
+    background-color: hsl(0, 73%, 44%);
+}
+
+.navbar ul li{
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 23px;
+    padding: 5px 10px;
+    align-self: center;
+}
+
+.navbar li.active a{
+    color: hsl(0, 0%, 100%);
+}
+
+.navbar li:hover{
+    color: hsl(0, 0%, 100%);
+}
+
+.f1_logo{
+    width: 180px;
+    height: 45px;
+}
+
+.user_icon{
+    width: 25px;
+}
+
+.cart_icon{
+    width: 30px;
+}
