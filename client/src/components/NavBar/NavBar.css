@@ -18,20 +18,20 @@
 .navbar a{
     color: inherit;
     text-decoration: none;
-    height: 100%;
+    height: 40px;
     display: flex;
     align-items: center;
     padding: .25rem;
 }
 
-.clickable_icon:hover{
+/* .clickable_icon:hover{
     background-color: hsl(0, 73%, 44%);
-}
+} */
 
 .navbar ul li{
     display: inline-block;
     margin: 10px 20px;
-    font-size: 23px;
+    font-size: 24px;
     padding: 5px 10px;
     align-self: center;
 }
@@ -55,4 +55,42 @@
 
 .cart_icon{
     width: 30px;
+}
+
+.dropdown-profile{
+    position: relative;
+    user-select: none;
+}
+
+.profile-menu{
+    position: absolute;
+    width: 100px;
+    left: 0;
+    /* top: calc(100% + .5rem); */
+    background-color: hsl(0, 73%, 44%);
+    /* padding: .75rem; */
+    border-radius: .25rem;
+    /* box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1); */
+    /* opacity: 1; */
+
+}
+
+.dropdown-option{
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dropdown-option:hover{
+    color: hsl(0, 0%, 100%);
+}
+
+.ifLogged{
+    display: flex;
+    align-items: center;
+}
+
+.ifLogged img{
+    cursor: pointer;
+    margin-right: 20px;
 }
