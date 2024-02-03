@@ -1,8 +1,8 @@
 import "./Login.css"
 import { Link } from "react-router-dom"
-import Google from "../../assets/google_logo.svg"
-import Facebook from "../../assets/facebook_logo.svg"
-import Apple from "../../assets/apple_logo.svg"
+import Google from "../../assets/logos_and_icons/google_logo.svg"
+import Facebook from "../../assets/logos_and_icons/facebook_logo.svg"
+import Apple from "../../assets/logos_and_icons/apple_logo.svg"
 
 const Login = () =>{
 

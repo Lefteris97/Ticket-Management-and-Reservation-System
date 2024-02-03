@@ -1,8 +1,8 @@
 import { useState } from "react"
 import "./NavBar.css"
-import f1_logo from "../../assets/F1_logo.png"
-import user_icon from "../../assets/iconmonstr-user.svg"
-import cart_icon from "../../assets/iconmonstr-shopping-cart.svg"
+import f1_logo from "../../assets/logos_and_icons/F1_logo.png"
+import user_icon from "../../assets/logos_and_icons/iconmonstr-user.svg"
+import cart_icon from "../../assets/logos_and_icons/iconmonstr-shopping-cart.svg"
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 
 export const NavBar = ({user}) =>{

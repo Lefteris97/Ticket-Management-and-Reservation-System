@@ -1,10 +1,14 @@
 const cookieSession = require('cookie-session')
-const express = require('express');
-const passport = require('passport');
-const passportSetup = require('./passport')
+const express = require('express')
+const passport = require('passport')
+require('./passport')
 const cors = require('cors')
+const authRoute = require("./routes/authRoute")
+const usersRoute = require("./routes/usersRoute")
+const eventsRoute = require("./routes/eventsRoute")
+const ticketsRoute = require("./routes/ticketsRoute")
+
 const app = express()
-const authRoute = require("./routes/auth")
 
 app.use(cookieSession({
     name:"session",
@@ -21,6 +25,23 @@ app.use(cors({
     credentials:true,
 }));
 
-app.use("/auth", authRoute);
+//middlewares
+app.use(express.json()); //to send json
 
-app.listen(7000, () => {console.log("Server started on port 7000")})
+app.use("/auth", authRoute);
+app.use("/users", usersRoute);
+app.use("/events", eventsRoute);
+app.use("/tickets", ticketsRoute);
+
+//global error handling middleware
+app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500
+    const errorMessage = err.message || "An error has occured!"
+    return res.status(errorStatus).json({
+        success: false,
+        status: errorStatus,
+        message: errorMessage
+    });
+})
+
+app.listen(7000, () => {console.log("Server started on port 7000")});
