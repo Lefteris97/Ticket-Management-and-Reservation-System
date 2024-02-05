@@ -3,10 +3,11 @@ const express = require('express')
 const passport = require('passport')
 require('./passport')
 const cors = require('cors')
-const authRoute = require("./routes/authRoute")
-const usersRoute = require("./routes/usersRoute")
-const eventsRoute = require("./routes/eventsRoute")
+const authRoutes = require("./routes/authRoutes")
+const usersRoutes = require("./routes/usersRoutes")
+const eventsRoutes = require("./routes/eventsRoutes")
 const ticketsRoute = require("./routes/ticketsRoute")
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -26,11 +27,12 @@ app.use(cors({
 }));
 
 //middlewares
+app.use(cookieParser());
 app.use(express.json()); //to send json
 
-app.use("/auth", authRoute);
-app.use("/users", usersRoute);
-app.use("/events", eventsRoute);
+app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
+app.use("/events", eventsRoutes);
 app.use("/tickets", ticketsRoute);
 
 //global error handling middleware

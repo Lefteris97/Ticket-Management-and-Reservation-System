@@ -28,25 +28,25 @@ class Event{
     }
 
     static findById(id){
-        let q = `SELECT * FROM events WHERE event_id = ${id}`;
+        let q = `SELECT * FROM events WHERE event_id = ?`;
 
-        return db.execute(q);
+        return db.execute(q, [id]);
     }
 
     static updateById(id, eventName){
         let q = `
             UPDATE events
-            SET event_name = '${eventName}'
-            WHERE event_id = ${id}
+            SET event_name = ?
+            WHERE event_id = ?
         `;
 
-        return db.execute(q);
+        return db.execute(q, [eventName, id]);
     }
 
     static deleteById(id){
-        let q = `DELETE FROM events WHERE event_id = ${id}`;
+        let q = `DELETE FROM events WHERE event_id = ?`;
 
-        return db.execute(q);
+        return db.execute(q, [id]);
     }
 }
 

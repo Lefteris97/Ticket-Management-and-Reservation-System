@@ -8,7 +8,7 @@ exports.createNewEvent = async (req, res, next) =>{
 
         await event.save();
 
-        res.status(201).json({message:"Created Event"});
+        res.status(201).json({message:"Created new Event"});
 
     } catch (error) {
         console.log(error);

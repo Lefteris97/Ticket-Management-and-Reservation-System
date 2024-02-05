@@ -1,5 +1,11 @@
 const router = require('express').Router()
 const passport = require('passport')
+const authController = require('../controllers/authController')
+
+//create new user
+router.post("/register", authController.register);
+
+router.post("/login", authController.login);
 
 router.get("/login/succeeded", (req, res) =>{
     if(req.user){
