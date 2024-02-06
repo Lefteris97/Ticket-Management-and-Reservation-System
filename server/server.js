@@ -7,6 +7,7 @@ const authRoutes = require("./routes/authRoutes")
 const usersRoutes = require("./routes/usersRoutes")
 const eventsRoutes = require("./routes/eventsRoutes")
 const ticketsRoute = require("./routes/ticketsRoute")
+const standsRoutes = require("./routes/standsRoutes")
 const cookieParser = require('cookie-parser')
 
 const app = express()
@@ -33,6 +34,7 @@ app.use(express.json()); //to send json
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/events", eventsRoutes);
+app.use("/stands", standsRoutes);
 app.use("/tickets", ticketsRoute);
 
 //global error handling middleware

@@ -18,7 +18,7 @@ class User{
 
         let createdAtDate = `${yyyy}-${mm}-${dd}`;
 
-        // Check if 'role' is undefined or null, and use the default value from the database
+        // Check if role is undefined or null, and use the default value from the database
         let roleValue = this.role !== undefined && this.role !== null ? `'${this.role}'` : 'DEFAULT';
 
         let q = `
