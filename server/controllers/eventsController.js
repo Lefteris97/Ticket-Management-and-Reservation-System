@@ -2,9 +2,9 @@ const Event = require('../models/eventsModel')
 
 exports.createNewEvent = async (req, res, next) =>{
     try {
-        let { event_name } = req.body;
+        let { event_name, circuit_name, event_date, flag_icon, photo, sold_out } = req.body;
 
-        const event = new Event(event_name);
+        const event = new Event(event_name, circuit_name, event_date, flag_icon, photo, sold_out);
 
         await event.save();
 
@@ -43,8 +43,8 @@ exports.getAllEvents = async (req, res, next) =>{
 exports.updateEvent = async (req, res, next) =>{
     try {
         let eventId = req.params.id;
-        let updatedEventName = req.body.event_name; 
-        const [updatedEvent, _] = await Event.updateById(eventId, updatedEventName)
+        let {event_name, circuit_name, event_date, flag_icon, photo, sold_out} = req.body; 
+        const [updatedEvent, _] = await Event.updateById(eventId, event_name, circuit_name, event_date, flag_icon, photo, sold_out)
 
         res.status(200).json({updatedEvent});
     } catch (error) {
