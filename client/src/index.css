@@ -18,3 +18,15 @@
   /* padding: 0% 20%; */
   margin: 0% 18%;
 }
+
+.test ul{
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.test li{
+  display: grid;
+}
