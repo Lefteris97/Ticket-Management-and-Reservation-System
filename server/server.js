@@ -27,8 +27,6 @@ app.use(cors({
     credentials:true,
 }));
 
-//middlewares
-app.use(cors());
 app.use(cookieParser());
 app.use(express.json()); //to send json
 

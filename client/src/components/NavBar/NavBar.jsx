@@ -49,7 +49,7 @@ export const NavBar = ({user}) =>{
                     <img src={cart_icon} alt="Cart Icon" className="cart_icon"/>
                 </Link>
             </div>
-        ) : (
+        ) : (  
             <Link to="/login" className="clickable_icon">   
                 <img src={user_icon} alt="User Icon" className="user_icon"/>
             </Link>
