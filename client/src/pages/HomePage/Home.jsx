@@ -1,5 +1,6 @@
-import useFetch from "../hooks/useFetch"
-import wallpaper from "../assets/photos/lights-out.jpg"
+import './Home.css'
+import useFetch from "../../hooks/useFetch"
+import wallpaper from "../../assets/photos/lights-out.jpg"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 
