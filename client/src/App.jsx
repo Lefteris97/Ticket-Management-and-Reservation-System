@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./pages/HomePage/Home";
-import Calendar from "./pages/Calendar";
+import Calendar from "./pages/CalendarPage/Calendar";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";

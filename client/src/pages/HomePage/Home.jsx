@@ -62,7 +62,7 @@ const Home = () => {
     return (
         <>
             <img src={wallpaper} className="homepage-image" />
-            <h2 className="home-title">2024 FIA FORMULA ONE WORLD CHAMPIONSHIP</h2>
+            <h1 className="home-title">2024 FIA FORMULA ONE WORLD CHAMPIONSHIP</h1>
             <hr className="home-line" />
             <ul className="events_list">
                 {eventsWithPhotos
