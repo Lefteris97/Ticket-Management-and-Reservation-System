@@ -1,49 +1,50 @@
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: hsl(0, 0%, 98%);
-    border-radius: 8px;
-    box-shadow: 0px 5px 33px -21px rgba(66,68,90,1);
-    -webkit-box-shadow: 0px 5px 33px -21px rgba(66,68,90,1);
-    -moz-box-shadow: 0px 5px 33px -21px rgba(66,68,90,1);
-  }
+.sendEmailForm{
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: hsl(0, 0%, 98%);
+  border-radius: 8px;
+  box-shadow: 0px 5px 33px -21px rgba(66,68,90,1);
+  -webkit-box-shadow: 0px 5px 33px -21px rgba(66,68,90,1);
+  -moz-box-shadow: 0px 5px 33px -21px rgba(66,68,90,1);
+}
   
-  form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
+.sendEmailForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
   
-  form input[type="text"],
-  form input[type="email"],
-  form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid hsl(0, 0%, 80%);
-    border-radius: 5px;
-    font-size: 16px;
-  }
+.sendEmailForm input[type="text"],
+.sendEmailForm input[type="email"],
+.sendEmailForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 5px;
+  font-size: 16px;
+}
   
-  form textarea {
-    resize: vertical; /* Allow vertical resizing */
-    max-height: 300px;
-    min-height: 100px;
-  }
+.sendEmailForm textarea {
+  resize: vertical; /* Allow vertical resizing */
+  max-height: 300px;
+  min-height: 100px;
+}
   
-  form input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+.sendEmailForm input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
   
-  form input[type="submit"]:hover {
-    background-color: hsl(0, 4%, 78%);
-  }
+.sendEmailForm input[type="submit"]:hover{
+  background-color: hsl(0, 89%, 64%);
+  color: white;
+}
   

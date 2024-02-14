@@ -24,7 +24,7 @@ const Email = () =>{
     };
 
     return (
-        <form ref={form} onSubmit={sendEmail}>
+        <form ref={form} onSubmit={sendEmail} className='sendEmailForm'>
             <label>Name</label>
             <input type="text" name="user_name" required/>
             <label>Email</label>
