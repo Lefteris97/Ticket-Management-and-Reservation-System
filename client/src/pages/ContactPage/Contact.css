@@ -1,0 +1,19 @@
+.contactContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 250px 25% 10px 40%;  /*top, right, bottom, left*/
+    min-width: 500px;
+    max-width: 500px;
+}
+
+.phoneInfo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.contactLine{
+    margin: 0 40%;
+    min-width: 500px;
+    max-width: 500px;
+}

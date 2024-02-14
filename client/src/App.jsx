@@ -5,7 +5,7 @@ import Register from "./components/Register";
 import Home from "./pages/HomePage/Home";
 import Calendar from "./pages/CalendarPage/Calendar";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
+import Contact from "./pages/ContactPage/Contact";
 import Profile from "./pages/Profile";
 import Event from "./pages/EventPage/Event";
 // import { Route, Routes} from "react-router-dom";
