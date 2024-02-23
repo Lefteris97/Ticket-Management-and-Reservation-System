@@ -6,6 +6,8 @@ import cart_icon from "../../assets/logos_and_icons/iconmonstr-shopping-cart.svg
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 
 export const NavBar = ({user}) =>{
+    console.log('USER: ', user);
+    
     const [isActive, setActive] = useState(false);
 
     const logout = () =>{

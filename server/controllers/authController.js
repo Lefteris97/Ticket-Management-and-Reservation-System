@@ -6,16 +6,24 @@ require('dotenv').config({path:"../.env"})
 
 exports.register = async (req, res, next) =>{
     try {
-        let {fname, lname, email, password, role} = req.body;
+        let {fname, lname, email, password, role, googleId} = req.body;
 
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
 
-        const user = new User(fname, lname, email, hash, role);
+        const user = new User(fname, lname, email, hash, role, googleId);
 
         await user.save();
 
-        res.status(201).json({message:"Created new User"});
+        res.status(201).json({
+            message:"Created new User",
+            user: {
+                fname: user.fname,
+                lname: user.lname,
+                email: user.email,
+            }  
+        });
+        
     } catch (error) {
         console.log(error);
         next(error);
@@ -23,36 +31,49 @@ exports.register = async (req, res, next) =>{
 }
 
 exports.login = async (req, res, next) =>{
+
     try {
-        // let eventId = req.params.id;
-        // let [event, _] = await Event.findById(eventId); // _ because we dont use the second value
-        let { email, password } = req.body;
-
-        const [userRow, _ ]= await User.getUserByEmail(email);
-
-        if (userRow.length === 0) return next(createError(404, "User not found!"));
-
-        const user = userRow[0];
-
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-        if (!isPasswordCorrect) return next(createError(400, "Wrong password or username!"));
-        
-        //delete users input for password
-        // delete user.password;
-
-        //if the password is correct create new token
-        const token = jwt.sign({id:user.user_id, role:user.role}, process.env.JWT_KEY);
-
-        //destruction of user  
-        const {password:pwd, role, created_at, ...otherDetails} = user;
-
-        res.cookie("access token", token, {
-            httpOnly:true
-        }).status(200).json({
-            details: {...otherDetails}, 
-            role
+        const { email, password } = req.body;
+    
+        if (!email || !password) return res.status(400).json({
+            'message': 'Email and password required'
         });
+    
+        const [foundUser, _] = await User.getUserByEmail(email);
+    
+        const user = foundUser[0];
+    
+        if (!user) return res.sendStatus(401); // unauthorized
+    
+        const match = await bcrypt.compare(password, user.password);
+        if (match){
+            const role = Object.values(user.role);
+    
+            const accessToken = jwt.sign(
+                { 
+                    "UserInfo": {
+                        "email": user.email,
+                        "role": role
+                    }
+                },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: '300s' }
+            );
+            const refreshToken = jwt.sign(
+                { "email": user.email },
+                process.env.REFRESH_TOKEN_SECRET,
+                { expiresIn: '1d' }
+            );
+    
+            user.refreshToken = refreshToken;
+            // const result = await foundUser[0].save();
+            // console.log(result);
+    
+            res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
+            res.json({accessToken});
+        } else {
+            res.sendStatus(401);
+        }
     } catch (error) {
         console.log(error);
         next(error);

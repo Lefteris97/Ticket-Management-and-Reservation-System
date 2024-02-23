@@ -44,12 +44,17 @@
     border-radius: 40px;
     margin-top: 5px;
   }
+
+  .submit.disabled {
+    cursor: not-allowed;
+  }
   
   .left,.right{
     flex: 1;
-    display: flex;
+    display: flex; 
     flex-direction: column;
     align-items: center;
+    
   }
   
   .register-link, .login-link{
@@ -130,7 +135,7 @@
     margin-bottom: 20px;
   }
 
-  .mediaButton:hover, .submit:hover{
+  .mediaButton:hover, .submit:not(.disabled):hover{
     background-color: hsl(0, 4%, 78%);
   }
 
