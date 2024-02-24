@@ -1,6 +1,4 @@
 .calContainer{
-    /* color: aqua; */
-    /* background-color: rgb(189, 186, 186); */
     margin: 0px 20% 10px 20%;  /*top, right, bottom, left*/
     align-self: center;
     display: flex;
@@ -10,7 +8,6 @@
 } 
 
 .dateGrid, .days {
-    /* background-color: rgb(21, 255, 0); */
     display: grid;
     grid-template-areas: "c1 c2 c3 c4 c5 c6 c7";
     grid-auto-columns: 100px;
@@ -56,7 +53,6 @@
 
 .today{
     color: hsl(0, 77%, 57%);
-    /* background-color: hsl(0, 77%, 57%); */
 }
 
 .calTitle{
@@ -86,4 +82,18 @@
 
 .info{
     margin-left: 50px;
+}
+
+.info li{
+    display: block;
+    margin-top: 20px;
+}
+
+.info li h3{
+    margin-top: 10px;
+}
+
+.raceDay {
+    background-image: url('../../assets/photos/F1_chequered_flag.svg');
+    background-size: cover; 
 }

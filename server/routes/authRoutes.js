@@ -56,7 +56,7 @@ router.get("/google/callback", passport.authenticate("google", ), (req, res) =>{
             { expiresIn: '300s' }
         );
 
-        res.cookie('google jwt', googleAccessToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
+        res.cookie('google_jwt', googleAccessToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
 
         res.redirect('http://localhost:5173/');
     } else {
