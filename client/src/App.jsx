@@ -23,7 +23,6 @@ import Users from "./pages/ForTesting/Users"
 const App = () => {
 
   const [user, setUser] = useState(null);
-  // const user = true;
 
   const { auth } = useAuth(); // Get the auth state using the useAuth hook
 

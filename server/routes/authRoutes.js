@@ -33,13 +33,14 @@ router.get("/logout", (req, res)=>{
     res.redirect("http://localhost:5173/");
 })
 
+router.get("/logout/dash", (req, res)=>{
+    req.logout();
+    res.clearCookie('jwt', {httpOnly: true});
+    res.redirect("http://localhost:5174/login");
+})
+
 // client request
 router.get("/google", passport.authenticate("google", {scope: ["profile"]}));
-
-// router.get("/google/callback", passport.authenticate("google", {
-//     successRedirect: "http://localhost:5173/",
-//     failureRedirect: "/login/failed"
-// }))  
 
 router.get("/google/callback", passport.authenticate("google", ), (req, res) =>{
     if(req.user){

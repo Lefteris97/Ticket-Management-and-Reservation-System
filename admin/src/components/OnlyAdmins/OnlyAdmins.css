@@ -1,0 +1,5 @@
+.onlyAdmins h1{
+    display: flex;
+    justify-content: center;
+    background-color: #eb8080;
+}

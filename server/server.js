@@ -15,17 +15,20 @@ const app = express()
 app.use(cookieSession({
     name:"session",
     keys:["mpsp2308"],
-    maxAge: 24 * 60 * 60 * 100   // 1 day
+    maxAge: 24 * 60 * 60 * 1000   // 1 day
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors({
-    origin:"http://localhost:5173",
-    methods:"GET, POST, PUT, DELETE",
-    credentials:true
-}));
+app.use(cors(
+    {
+        origin:["http://localhost:5173", "http://localhost:5174"],
+        methods:"GET, POST, PUT, DELETE",
+        credentials:true
+    }
+));
+
 
 app.use(cookieParser());
 app.use(express.json()); //to send json

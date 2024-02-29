@@ -40,7 +40,8 @@ export const NavBar = ({user}) =>{
                             <div className="dropdown-option" onClick={logout}>
                                 <Link to='#'>
                                     Logout
-                                </Link></div>
+                                </Link>
+                            </div>
                         </div>
                     )}
                     
