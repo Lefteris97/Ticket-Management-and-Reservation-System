@@ -52,12 +52,14 @@ const Login = () =>{
 
             // Log the response data
             console.log('Login response:', response.data);
+            console.log('role response:', response.data.role);
 
             const accessToken = response?.data?.accessToken;
             console.log(accessToken);
             const role = response?.data?.role;
+            const user_id = response?.data?.user_id;
 
-            setAuth({email, pwd, role, accessToken});
+            setAuth({email, pwd, role, user_id, accessToken});
             
             setEmail('');
             setPwd('');

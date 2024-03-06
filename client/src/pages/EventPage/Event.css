@@ -1,10 +1,4 @@
-/* .eventContainer{
-    /* background-color: rgb(83, 228, 64); */
-    /* margin: 10px 15% 10px 15%;  top, right, bottom, left */
-/* } */
-
 .eventWrapper{
-    /* background-color: blueviolet; */
     margin: 0px 15% 10px 15%;  /*top, right, bottom, left*/
     padding: 20px;
     align-self: center;
@@ -24,7 +18,13 @@
     margin-left: 10px;
 }
 
-.eventDate{
+.eventInfo{
+    display: flex;
+    gap: 20px;
+}
+
+.eventInfo h2{
+    display: flex;
     font-size: 22px;
     margin-bottom: 10px;
     color: hsl(0, 1%, 20%);
@@ -33,7 +33,6 @@
 .eventImage{
     width: 100%;    
     height: 500px;
-    /* align-items: center; */
     object-fit: cover;
     object-position: 50% 80%; 
 }
@@ -41,37 +40,62 @@
 .eventContent{
     margin-top: 20px;
     padding: 10px;
-    /* border: 5px;
-    border-radius: 5px; */
     display: flex;
-    /* outline: auto; */
 }
 
 .leftContent, .rightContent{
     flex: 1;
-    /* text-align: center; */
 }
 
-.circuitName{
-    text-align: center;
-    text-decoration-line: underline;
+.leftContent{
+    padding: 50px;
 }
 
 .circuitMapWrapper{
     justify-content: space-between; 
 }
 
-/* .circuitWrapper{
-    text-align: center;
-} */
-
-/* .circuitName{
-    margin-bottom: 10px;
-} */
-
 .circuitMap{
     width: 100%;
     height: auto;
-    /* background-color: black;
-    object-fit: cover; */
+}
+
+.leftContent h2{
+    margin: 20px 140px;
+    text-decoration: underline;
+}
+
+.standContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 50%;
+    min-width: 250px;
+    padding: 10px 30px 20px 0;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.standContainer:hover{
+    border-bottom: 2px solid hsl(0, 97%, 70%);
+    border-right: 2px solid hsl(0, 97%, 70%);
+}
+
+.standPrice{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.standPrice button{
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(0, 85%, 61%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    height: 35px;
+    cursor: pointer;
 }

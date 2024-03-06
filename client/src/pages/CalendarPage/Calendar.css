@@ -97,3 +97,20 @@
     background-image: url('../../assets/photos/F1_chequered_flag.svg');
     background-size: cover; 
 }
+
+.visitButton, .showTicketButton{
+    padding: 5px;
+    /* background-color: hsl(0, 85%, 61%); */
+    background-color: hsl(0, 0%, 90%);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}   
+
+.visitButton:hover, .showTicketButton:hover{
+    /* background-color: hsl(0, 62%, 56%); */
+    background-color: hsl(0, 0%, 71%);
+}

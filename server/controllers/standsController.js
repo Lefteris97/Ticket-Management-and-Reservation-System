@@ -2,9 +2,9 @@ const Stand = require('../models/standsModel')
 
 exports.createNewStand = async (req, res, next) =>{
     try {
-        let { event_id, stand_name, capacity } = req.body;
+        let { event_id, stand_name, price, capacity } = req.body;
 
-        const stand = new Stand(event_id, stand_name, capacity);
+        const stand = new Stand(event_id, stand_name, price, capacity);
 
         await stand.save();
 
@@ -29,6 +29,18 @@ exports.getStandById = async (req, res, next) =>{
     }
 }
 
+exports.getStandsByEventId = async (req, res, next) =>{
+    try {
+        let eventId = req.params.eventId;
+        let [eventStands, _] = await Stand.findByEventId(eventId);
+
+        res.status(200).json({eventStands});
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
 exports.getAllStands = async (req, res, next) =>{
     try {
         const [stands, _] = await Stand.findAll();  
@@ -43,8 +55,8 @@ exports.getAllStands = async (req, res, next) =>{
 exports.updateStand = async (req, res, next) =>{
     try {
         let standId = req.params.id;
-        let { event_id, stand_name, capacity } = req.body; 
-        const [updatedStand, _] = await Stand.updateById(standId, event_id, stand_name, capacity)
+        let { event_id, stand_name, price, capacity } = req.body; 
+        const [updatedStand, _] = await Stand.updateById(standId, event_id, stand_name, price, capacity)
 
         res.status(200).json({updatedStand});
     } catch (error) {
@@ -62,6 +74,23 @@ exports.deleteStand = async (req, res, next)=>{
     } catch (error) {
         console.log(error);
         next(error);
+    }
+}
+
+exports.updateCapacity = async (standId, adjustment) =>{
+    try {
+        const [stand, _] = await Stand.findById(standId);
+
+        const currentCapacity = stand[0].capacity;
+
+        const newCapacity = currentCapacity + adjustment;
+
+        await Stand.updateCapacityByStandId(standId, newCapacity);
+
+        console.log(newCapacity)
+        console.log('Stand capacity updated successfully');
+    } catch (error) {
+        console.log(error);
     }
 }
 

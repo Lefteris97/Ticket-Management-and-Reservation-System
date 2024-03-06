@@ -8,6 +8,8 @@ const Home = () => {
     const { data, loading, error } = useFetch('http://localhost:7000/events');
     const [eventsWithPhotos, setEventsWithPhotos] = useState([]);
 
+    console.log(data);
+
     useEffect(() => {
         if (!loading && !error && data && data.events) {
             const updatedEvents = data.events.map(async event => {
@@ -24,7 +26,7 @@ const Home = () => {
                     // Read the flag icon Blob and convert it to a Base64-encoded string
                     const flagIconBase64String = flagIconBlob ? await blobToBase64(flagIconBlob) : null;
     
-                    console.log("Flag Icon Base64 String:", flagIconBase64String); // Log the flag icon Base64 string
+                    // console.log("Flag Icon Base64 String:", flagIconBase64String); // Log the flag icon Base64 string
                     
                     return {
                         ...event,
@@ -66,7 +68,7 @@ const Home = () => {
             <hr className="home-line" />
             <ul className="events_list">
                 {eventsWithPhotos
-                    .filter(event => !event.Sold_out) // Filter events that have happened
+                    .filter(event => !event.completed) // Filter events that have happened
                     .map(event => (
                         <Link to={`/gp/${event.event_id}`} key={event.event_id} className="events_items">
                             <li>

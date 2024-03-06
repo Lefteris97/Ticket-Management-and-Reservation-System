@@ -29,6 +29,7 @@ router.post("/", standsController.createNewStand);
 
 //GET
 router.get("/:id", standsController.getStandById);
+router.get("/of_event/:eventId", standsController.getStandsByEventId);
 
 //GET ALL
 router.get("/", standsController.getAllStands);

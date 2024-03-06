@@ -2,9 +2,9 @@ const Event = require('../models/eventsModel')
 
 exports.createNewEvent = async (req, res, next) =>{
     try {
-        let { event_name, circuit_name, event_date, flag_icon, photo, sold_out } = req.body;
+        let event_fields = req.body;
 
-        const event = new Event(event_name, circuit_name, event_date, flag_icon, photo, sold_out);
+        const event = new Event(event_fields);
 
         await event.save();
 
@@ -43,8 +43,8 @@ exports.getAllEvents = async (req, res, next) =>{
 exports.updateEvent = async (req, res, next) =>{
     try {
         let eventId = req.params.id;
-        let {event_name, circuit_name, event_date, flag_icon, photo, sold_out} = req.body; 
-        const [updatedEvent, _] = await Event.updateById(eventId, event_name, circuit_name, event_date, flag_icon, photo, sold_out)
+        let event_fields = req.body; 
+        const [updatedEvent, _] = await Event.updateById(eventId, event_fields)
 
         res.status(200).json({updatedEvent});
     } catch (error) {
@@ -62,6 +62,24 @@ exports.deleteEvent = async (req, res, next)=>{
     } catch (error) {
         console.log(error);
         next(error);
+    }
+}
+
+exports.updateTotalCapacity = async (eventId, adjustment) =>{
+    try {
+        // Get the current total capacity of the event
+        const [event, _] = await Event.findById(eventId);
+        // console.log('event: ', event);
+        const currentTotalCapacity = event[0].total_capacity;
+
+        // Calculate the new total capacity after adjustment
+        const newTotalCapacity = currentTotalCapacity + adjustment;
+
+        await Event.updateTotalCapacityByEventId(eventId, newTotalCapacity);
+
+        console.log('Total capacity updated successfully');
+    } catch (error) {
+        console.log(error);
     }
 }
 

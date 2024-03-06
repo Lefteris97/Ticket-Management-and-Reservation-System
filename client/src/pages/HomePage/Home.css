@@ -1,122 +1,123 @@
 .home-title{
-    font-weight: 900;
-    margin-left: 24%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+  display: block;
+  font-weight: 900;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
   
-  .home-line{
-    background-color: hsl(0, 80%, 56%);
-    width: 52%;
-    height: 15px;
-    margin-bottom: 20px;
-    margin-left: 24%;
-  }
+.home-line{
+  background-color: hsl(0, 80%, 56%);
+  width: 52%;
+  height: 15px;
+  margin-bottom: 20px;
+  margin-left: 24%;
+}
   
-  .homepage-image{
-    width: 100%;
-    max-width: 2560px;
-    height: 500px;
-    object-fit: cover;
-    object-position: 50% 90%;
-    margin: 0;
-    padding: 0;
+.homepage-image{
+  width: 100%;
+  max-width: 2560px;
+  height: 500px;
+  object-fit: cover;
+  object-position: 50% 90%;
+  margin: 0;
+  padding: 0;
+  /* justify-content: center; */
+}
+  
+/* .homepage ul{
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+} */
+
+/* .homepage li{
+  display: grid;
+} */
+  
+.events_list {
+  /* background-color: black; */
+  list-style: none;
+  /* margin: 0px; */
+  display: grid;
+  /* grid-template-areas: "c1 c2 c3 c4";
+  grid-auto-columns: 300px; */
+  column-gap: 30px;
+  row-gap: 20px;
+  justify-content: center;
+  margin-bottom: 50px; /* or make a footer */
+  /* list-style: none; */
+}
+
+/* For screens smaller than 768px, center each event item */
+@media screen and (max-width: 768px) {
+  .events_items{
+    margin: 0 auto; /* Center the items horizontally */
+  }
+}
+
+/* For screens smaller than 768px, display one item per row */
+@media screen and (max-width: 768px) {
+  .events_list {
+    grid-template-areas: "c1"; /* Each item occupies one column */
+    grid-auto-columns: 100%; /* Each column takes up the full width */
     /* justify-content: center; */
   }
-  
-  /* .homepage ul{
-    width: 100%;
-    max-width: 1024px;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  } */
-  
-  /* .homepage li{
-    display: grid;
-  } */
-  
+}
+
+/* For screens larger than 768px, display up to four items per row */
+@media screen and (min-width: 768px) {
   .events_list {
-    /* background-color: black; */
-    list-style: none;
-    /* margin: 0px; */
-    display: grid;
-    /* grid-template-areas: "c1 c2 c3 c4";
-    grid-auto-columns: 300px; */
-    column-gap: 30px;
-    row-gap: 20px;
-    justify-content: center;
-    margin-bottom: 50px; /* or make a footer */
-    /* list-style: none; */
+    grid-template-areas: "c1 c2 c3 c4"; /* Each item occupies its own column */
+    grid-auto-columns: 300px; /* Each column has a fixed width */
   }
-  
-  /* For screens smaller than 768px, center each event item */
-  @media screen and (max-width: 768px) {
-    .events_items{
-      margin: 0 auto; /* Center the items horizontally */
-    }
-  }
-  
-  /* For screens smaller than 768px, display one item per row */
-  @media screen and (max-width: 768px) {
-    .events_list {
-      grid-template-areas: "c1"; /* Each item occupies one column */
-      grid-auto-columns: 100%; /* Each column takes up the full width */
-      /* justify-content: center; */
-    }
-  }
-  
-  /* For screens larger than 768px, display up to four items per row */
-  @media screen and (min-width: 768px) {
-    .events_list {
-      grid-template-areas: "c1 c2 c3 c4"; /* Each item occupies its own column */
-      grid-auto-columns: 300px; /* Each column has a fixed width */
-    }
-  }
-  
-  .events_items {
-    height: 400px;
-    background-color: hsl(218, 15%, 86%);
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    /* outline: auto; */
-    text-decoration: none;
-  }
-  
-  .events_items:hover{
-    background-color: hsl(0, 89%, 64%);
-  }
-  
-  .event_image{
-    width: 280px;
-    height: 320px;
-    /* height: 300px; */ /* if the info doesnt fit */
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  /* .events_items h2, p{
-    background-color: aliceblue;
-  } */
-  
-  .event_header, .event_info{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: hsl(0, 0%, 0%);
-  }
-  
-  .event_info p{
-    margin-top: 5px;
-    font-weight: bold;
-    color: hsl(0, 0%, 26%);  
-  }
-  
-  .flag_icon{
-    width: 32px;
-    height: 21px;
-    border: 2px solid black;
-    border-radius: 5px;
-    object-fit: cover;
-  }
+}
+
+.events_items {
+  height: 400px;
+  background-color: hsl(218, 15%, 86%);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  /* outline: auto; */
+  text-decoration: none;
+}
+
+.events_items:hover{
+  background-color: hsl(0, 89%, 64%);
+}
+
+.event_image{
+  width: 280px;
+  height: 320px;
+  /* height: 300px; */ /* if the info doesnt fit */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* .events_items h2, p{
+  background-color: aliceblue;
+} */
+
+.event_header, .event_info{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: hsl(0, 0%, 0%);
+}
+
+.event_info p{
+  margin-top: 5px;
+  font-weight: bold;
+  color: hsl(0, 0%, 26%);  
+}
+
+.flag_icon{
+  width: 32px;
+  height: 21px;
+  border: 2px solid black;
+  border-radius: 5px;
+  object-fit: cover;
+}

@@ -1,10 +1,22 @@
 const router = require('express').Router()
-const db = require('../database')
+const ticketsController = require('../controllers/ticketsController')
 
-router.get('/', (req, res, next) =>{
-    db.query('SELECT * FROM tickets', (err, results, fields) =>{
-        !err ? res.json(results) : res.json({err});
-    });
-});
+
+//CREATE
+router.post("/", ticketsController.createNewTicket);
+
+//GET
+router.get("/:id", ticketsController.getTicketById);
+router.get("/attendees/:id", ticketsController.getTotalAttendeesByEventId);
+router.get("/user/:user_id/event/:event_id", ticketsController.getUserTicketByEventId);
+
+//GET ALL
+router.get("/", ticketsController.getAllTickets);
+
+//UPDATE
+router.put("/:id", ticketsController.updateTicket);
+
+//DELETE
+router.delete("/:id", ticketsController.deleteTicket);
 
 module.exports = router

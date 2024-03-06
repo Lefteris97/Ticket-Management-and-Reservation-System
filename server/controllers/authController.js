@@ -48,18 +48,20 @@ exports.login = async (req, res, next) =>{
         const match = await bcrypt.compare(password, user.password);
         if (match){
             
-            const {password:pwd, role, created_at, ...otherDetails} = user;
-    
+            const {password:pwd, role, user_id, ...otherDetails} = user;
+
             const accessToken = jwt.sign(
                 { 
                     "UserInfo": {
                         "email": user.email,
-                        "role": role
+                        "role": role,
+                        "user_id": user.user_id 
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: '300s' }
             );
+            
             const refreshToken = jwt.sign(
                 { "email": user.email },
                 process.env.REFRESH_TOKEN_SECRET,
@@ -70,7 +72,7 @@ exports.login = async (req, res, next) =>{
     
             res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
 
-            res.json({accessToken, role});
+            res.json({accessToken, role, user_id});
         } else {
             res.sendStatus(401);
         }
