@@ -1,7 +1,11 @@
+.contactForm{
+    margin-top: 90px;
+}
+
 .contactContainer{
     display: flex;
     justify-content: space-between;
-    margin: 250px 25% 10px 40%;  /*top, right, bottom, left*/
+    margin: 0 auto;
     min-width: 500px;
     max-width: 500px;
 }
@@ -13,7 +17,7 @@
 }
 
 .contactLine{
-    margin: 0 40%;
+    margin: 0 auto;
     min-width: 500px;
     max-width: 500px;
 }

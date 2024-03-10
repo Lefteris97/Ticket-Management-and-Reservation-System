@@ -22,33 +22,15 @@
   object-position: 50% 90%;
   margin: 0;
   padding: 0;
-  /* justify-content: center; */
 }
   
-/* .homepage ul{
-  width: 100%;
-  max-width: 1024px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-} */
-
-/* .homepage li{
-  display: grid;
-} */
-  
 .events_list {
-  /* background-color: black; */
   list-style: none;
-  /* margin: 0px; */
   display: grid;
-  /* grid-template-areas: "c1 c2 c3 c4";
-  grid-auto-columns: 300px; */
   column-gap: 30px;
   row-gap: 20px;
   justify-content: center;
   margin-bottom: 50px; /* or make a footer */
-  /* list-style: none; */
 }
 
 /* For screens smaller than 768px, center each event item */
@@ -63,7 +45,6 @@
   .events_list {
     grid-template-areas: "c1"; /* Each item occupies one column */
     grid-auto-columns: 100%; /* Each column takes up the full width */
-    /* justify-content: center; */
   }
 }
 
@@ -92,14 +73,9 @@
 .event_image{
   width: 280px;
   height: 320px;
-  /* height: 300px; */ /* if the info doesnt fit */
   object-fit: cover;
   border-radius: 10px;
 }
-
-/* .events_items h2, p{
-  background-color: aliceblue;
-} */
 
 .event_header, .event_info{
   display: flex;

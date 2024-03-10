@@ -2,11 +2,9 @@ import { useState } from "react"
 import "./NavBar.css"
 import f1_logo from "../../assets/logos_and_icons/F1_logo.png"
 import user_icon from "../../assets/logos_and_icons/iconmonstr-user.svg"
-import cart_icon from "../../assets/logos_and_icons/iconmonstr-shopping-cart.svg"
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 
 export const NavBar = ({user}) =>{
-    console.log('USER: ', user);
     
     const [isActive, setActive] = useState(false);
 
@@ -23,16 +21,13 @@ export const NavBar = ({user}) =>{
             <ul>
                 <CustomLink to="/">Home</CustomLink> 
                 <CustomLink to="/calendar">Calendar</CustomLink>
-                {/* <CustomLink to="/about">About</CustomLink> */}
                 <CustomLink to="/contact-us">Contact Us</CustomLink>
             </ul>
 
             { user ? (
                 <div className="ifLogged">
                     <div className="dropdown-profile" onClick={e => setActive(!isActive)}>
-                        {/* <Link to="/profile" className="clickable_icon">    */}
                         <img src={user_icon} alt="User Icon" className="user_icon"/>
-                        {/* </Link> */}
 
                         {isActive && (
                             <div className="profile-menu">
@@ -44,11 +39,6 @@ export const NavBar = ({user}) =>{
                         )}
                         
                     </div>
-                
-                    
-                    <Link to="/shopping-cart" className="clickable_icon">
-                        <img src={cart_icon} alt="Cart Icon" className="cart_icon"/>
-                    </Link>
                 </div>
             ) : (  
                 <Link to="/login" className="clickable_icon">   

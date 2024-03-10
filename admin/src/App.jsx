@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Login from './components/Login'
@@ -18,12 +17,9 @@ import Ticket from './pages/TicketPage/Ticket'
 
 const App = () =>{
 
-  const {auth} = useAuth();
+  const { auth } = useAuth();
 
   const isLoggedIn = !!auth.accessToken;
-  console.log('ISLOGGEDIN == ', isLoggedIn);
-  console.log(auth.role);
-  console.log(auth.accessToken);
 
   const LimitedAccess = ({children}) => {
 

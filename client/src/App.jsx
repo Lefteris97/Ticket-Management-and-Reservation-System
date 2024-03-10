@@ -5,7 +5,6 @@ import Register from "./components/Register";
 import Home from "./pages/HomePage/Home";
 import Calendar from "./pages/CalendarPage/Calendar";
 import Contact from "./pages/ContactPage/Contact";
-import Profile from "./pages/Profile";
 import Event from "./pages/EventPage/Event";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -38,13 +37,8 @@ const App = () => {
     getUser();
   }, []);
 
-  // console.log(user);
   // Determine if a user is logged in based on the auth state
   const isLoggedIn = !!auth.accessToken || !!user;
-  // console.log('ISLOGGEDIN == ', isLoggedIn);
-  // console.log('auth id == ', auth.user_id);
-  console.log('auth user == ', auth?.user);
-  // console.log('auth email == ', auth.email);
 
   return(
     <>
@@ -53,14 +47,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/calendar" element={<Calendar auth={auth}/>} />
-          {/* <Route path="/about" element={<About/>} /> */}
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/gp/:eventId" element={<Event auth={auth}/>}/>
-          <Route 
-                path="/profile" 
-                // element={ isLoggedIn ? <Profile/> : <Navigate to="/login"/>} 
-                element={<Profile></Profile>} 
-          />
           <Route 
                 path="/login" 
                 element={ isLoggedIn ? <Navigate to="/" /> : <Login/>} 
@@ -68,8 +56,6 @@ const App = () => {
 
           <Route path="/sign-up" element={<Register/>} />
         </Routes>
-
-        
       </div>
     </>
   )
