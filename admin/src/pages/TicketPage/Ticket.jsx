@@ -1,14 +1,13 @@
-import './Event.css'
+import '../EventPage/Event.css'
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
-import EditEvent from '../../components/EditEvent';
+import EditTicket from '../../components/EditTicket';
 
-const Event = () =>{
+const Ticket = () =>{
 
     const { id } = useParams();
-    console.log('use params: ', id);
 
-    const { data, loading, error } = useFetch(`http://localhost:7000/events/${id}`);
+    const { data, loading, error } = useFetch(`http://localhost:7000/tickets/${id}`);
 
     if (loading) {
         return <div>Loading user data...</div>;
@@ -20,9 +19,9 @@ const Event = () =>{
 
     return (
         <div className="event">
-            {data && <EditEvent {...data}/>}
+            {data && <EditTicket {...data}/>}
         </div>
     )
 }
 
-export default Event
+export default Ticket

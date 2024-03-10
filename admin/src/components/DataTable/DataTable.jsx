@@ -13,9 +13,6 @@ const DataTable = (props) =>{
     const [list, setList] = useState([]);
     const {data, loading, error} = useFetch(`http://localhost:7000/${path}`);
 
-    console.log(data);
-    console.log(`http://localhost:7000/${path}`);
-
     useEffect(() =>{
         if (data && data[path]){
             setList(data[path])
@@ -50,12 +47,12 @@ const DataTable = (props) =>{
     const actionColumn = {
         field: "action",
         headerName: "Action",
+        sortable: false,
         width: 80,
         renderCell: (params) =>{
-            // console.log('params: ', params);
             return (
                 <div className="action">
-                    <Link to={`/${props.slug}/${params.row.id}`}>
+                    <Link to={`/${props.slug}/${params.row[uniqueIdentifier]}`}>
                         <BiEdit size={22} color='#4d79ff'/>
                     </Link>
                     <div className="delete" onClick={()=>handleDelete(params.row[uniqueIdentifier])}>
@@ -65,6 +62,32 @@ const DataTable = (props) =>{
             )
         }
     }
+
+    // const renderImage = (imgData, isSvg) => {
+    //     if (isSvg) {
+    //         // Directly render SVG using dangerouslySetInnerHTML
+    //         return <div dangerouslySetInnerHTML={{ __html: imgData }} />;
+    //     } else {
+    //         // Render PNG image using an img tag
+    //         return <img src={imgData} alt="icon" style={{ width: '50px', height: 'auto' }} />;
+    //     }
+    // };
+
+    // const columnsWithImageRendering = props.columns.map((column) => {
+    //     if (column.field === 'flag_icon' || column.field === 'photo' || column.field === 'circuit_map') {
+    //         return {
+    //             ...column,
+    //             renderCell: (params) => {
+    //                 const imageData = params.row[column.field]?.data;
+    //                 console.log(column.field)
+    //                 console.log(params.row[column.field]);
+    //                 const isSvg = column.field !== 'photo';
+    //                 return renderImage(imageData, isSvg);
+    //             }
+    //         };
+    //     }
+    //     return column;
+    // });
     
     return (
         <div className="dataTable">
@@ -73,6 +96,7 @@ const DataTable = (props) =>{
                 // rows={props.rows}
                 rows={list}
                 columns={[...props.columns, actionColumn]}
+                // columns={[...columnsWithImageRendering, actionColumn]}
                 initialState={{
                 pagination: {
                     paginationModel: {

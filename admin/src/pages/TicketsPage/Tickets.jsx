@@ -1,52 +1,28 @@
 import './Tickets.css'
 import { useState } from 'react'
-// import Add from '../../components/Add'
+import AddTicket from '../../components/AddTicket'
 import DataTable from '../../components/DataTable'
-
-const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-        field: 'img',
-        headerName: 'Image',
-        width: 100,
-        renderCall: (params) =>{
-            return <img src={params.row.img} alt="" />;
-        }
-    },
-    {
-        field: 'title',
-        headerName: 'Title',
-        type: 'string',
-        width: 150,
-        editable: true,
-    },
-    {
-        field: 'price',
-        headerName: 'Price',
-        type: 'number',
-        width: 50,
-        editable: true,
-    },
-    {
-        field: 'soldOut',
-        headerName: 'Sold Out',
-        type: 'boolean',
-        width: 110,
-        editable: true,
-    },
-];
+import { ticketsColumns } from '../../dtsource';
+import { ticketInputs } from '../../formSource';
+import { AiOutlineReload } from "react-icons/ai";
 
 const Tickets = () =>{
     const [open, setOpen] = useState(false);
+    const [reloadComponent, setReloadComponent] = useState(false);
+
+    const handleReloadComponent = () => {
+        setReloadComponent(prevState => !prevState);
+    };
 
     return (
         <div className='tickets'>
             <div className="info">
                 <h1>Tickets</h1>
                 <button onClick={() => setOpen(true)}>Add New Ticket</button>
+                <AiOutlineReload size={22} onClick={handleReloadComponent}/>
             </div>
-            <DataTable slug="tickets" columns={columns}/>
-            {open && <Add slug="ticket" columns={columns} setOpen={setOpen}/>}
+            <DataTable key={reloadComponent ? 'reload' : 'normal'} slug="tickets" columns={ticketsColumns}/>
+            {open && <AddTicket slug="ticket" columns={ticketInputs} setOpen={setOpen}/>}
         </div>
     )
 }

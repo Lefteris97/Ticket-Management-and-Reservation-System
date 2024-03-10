@@ -70,3 +70,20 @@
 .modal button:hover{
     background-color: hsl(0, 0%, 85%);
 }
+
+.uploadImages { 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;    
+}
+
+.flagUpload, .photoUpload, .circuitUpload{
+    display: flex;
+    font-weight: bold;
+    gap: 10px;
+}
+
+.uploadIcon{
+    cursor: pointer;
+}

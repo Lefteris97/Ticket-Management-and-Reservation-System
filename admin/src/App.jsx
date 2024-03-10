@@ -13,6 +13,8 @@ import Users from './pages/UsersPage'
 import { Navigate, Route, Routes } from "react-router-dom";
 import useAuth from './hooks/useAuth'
 import OnlyAdmins from './components/OnlyAdmins'
+import Stand from './pages/StandPage/Stand'
+import Ticket from './pages/TicketPage/Ticket'
 
 const App = () =>{
 
@@ -20,6 +22,8 @@ const App = () =>{
 
   const isLoggedIn = !!auth.accessToken;
   console.log('ISLOGGEDIN == ', isLoggedIn);
+  console.log(auth.role);
+  console.log(auth.accessToken);
 
   const LimitedAccess = ({children}) => {
 
@@ -93,6 +97,14 @@ const App = () =>{
         <Route
           path="/events/:id"
           element={<Layout><FullSecure><Event/></FullSecure></Layout>}
+        />
+        <Route
+          path="/stands/:id"
+          element={<Layout><FullSecure><Stand/></FullSecure></Layout>}
+        />
+        <Route
+          path="/tickets/:id"
+          element={<Layout><FullSecure><Ticket/></FullSecure></Layout>}
         />
       </Routes>
     </>

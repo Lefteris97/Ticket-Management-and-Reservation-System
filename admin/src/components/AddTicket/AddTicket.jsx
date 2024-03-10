@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './Add.css'
+import '../AddUser/Add.css'
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import axios from 'axios';
 
-const AddUser = (props) =>{
+const AddTicket = (props) =>{
 
     const [info, setInfo] = useState({});
 
@@ -16,11 +16,11 @@ const AddUser = (props) =>{
 
         //add new item
         try {
-            const newUser = {
+            const newTicket = {
                 ...info
             }
 
-            await axios.post("http://localhost:7000/auth/register/", newUser);
+            await axios.post("http://localhost:7000/tickets", newTicket);
             
             props.setOpen(false); 
         } catch (error) {
@@ -34,15 +34,14 @@ const AddUser = (props) =>{
                 <span className="close" onClick={() => props.setOpen(false)}><AiOutlineCloseCircle size={22}/></span>
                 <h1>Add new {props.slug}</h1>
                 <form onSubmit={handleSubmit}>
-                    {props.inputs.map(input => {
+                    {props.columns.map(column => {
                             return (
-                                <div className="item" key={input.id}>
-                                    <label>{input.label}</label>
-                                    <input onChange={handleChange} type={input.type} placeholder={input.placeholder} id={input.id}/>
+                                <div className="item" key={column.id}>
+                                    <label>{column.label}</label>
+                                    <input onChange={handleChange} type={column.type} placeholder={column.placeholder} id={column.id}/>
                                 </div>
                             );
-                        })
-                    }
+                    })}
                     <button>Save</button>
                 </form>
             </div>
@@ -50,4 +49,4 @@ const AddUser = (props) =>{
     )
 }
 
-export default AddUser
+export default AddTicket

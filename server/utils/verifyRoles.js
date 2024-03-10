@@ -1,5 +1,6 @@
 const verifyRoles = (...allowedRoles) =>{
     return (req, res, next) =>{
+        console.log('gia na doume: ', req?.body);
         if (!req?.role) return res.sendStatus(401);
         const rolesArray = [...allowedRoles];
         console.log(rolesArray);

@@ -1,18 +1,28 @@
 import './User.css'
-import ItemPage from '../../components/ItemPage/ItemPage'
+import { useParams } from 'react-router-dom';
+import useFetch from '../../hooks/useFetch';
+import EditUser from '../../components/EditUser';
 
-const singleUser = {
-    fname: 'Moses',
-    lname: 'Wright',
-};
+const User = () =>{ 
 
-const User = () =>{
+    const { id } = useParams();
+    console.log('use params: ', id);
 
-    //Fetch data and send to item page
+    const { data, loading, error } = useFetch(`http://localhost:7000/users/${id}`);
+
+    if (loading) {
+        return <div>Loading user data...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    console.log(data);
+
     return (
         <div className="user">
-            {/* <ItemPage/> */}
-            <ItemPage {...singleUser}/>
+            {data && <EditUser {...data}/>}
         </div>
     )
 }
