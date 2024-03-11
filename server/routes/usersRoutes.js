@@ -1,36 +1,18 @@
-// const router = require('express').Router()
-// const db = require('../database')
-// const userController = require('../controllers/userController')
-// const { verifyToken, verifyUser, verifyAdmin, verifyTicketCollector } = require('../utils/verifyToken');
-
-// //GET
-// router.get("/:id", verifyUser, userController.getUserById);
-
-// //GET ALL
-// router.get("/", verifyAdmin, userController.getAllUsers);
-
-// //UPDATE
-// router.put("/:id", verifyUser, userController.updateUser);
-
-// //DELETE
-// router.delete("/:id", verifyAdmin, userController.deleteUser);
-
-// module.exports = router
-
 const router = require('express').Router()
 const userController = require('../controllers/userController')
 const verifyToken = require('../utils/verifyToken')
+const verifyRoles = require('../utils/verifyRoles')
 
 //GET
 router.get("/:id", userController.getUserById);
 
 //GET ALL
-router.get("/", userController.getAllUsers);
+router.get("/", verifyToken, verifyRoles('admin'), userController.getAllUsers);
 
 //UPDATE
-router.put("/:id", userController.updateUser);
+router.put("/:id", verifyToken, verifyRoles('admin'), userController.updateUser);
 
 //DELETE
-router.delete("/:id", userController.deleteUser);
+router.delete("/:id", verifyToken, verifyRoles('admin'), userController.deleteUser);
 
 module.exports = router

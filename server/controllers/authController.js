@@ -46,6 +46,7 @@ exports.login = async (req, res, next) =>{
         if (!user) return res.sendStatus(401); // unauthorized
     
         const match = await bcrypt.compare(password, user.password);
+        
         if (match){
             
             const {password:pwd, role, user_id, ...otherDetails} = user;

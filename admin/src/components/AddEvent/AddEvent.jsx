@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../AddUser/Add.css'
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { ImFolderUpload } from "react-icons/im";
 import axios from 'axios';
+import AuthContext from '../../context/AuthProvider';
 
 const AddEvent = (props) =>{
     const [file, setFile] = useState("");
     const [info, setInfo] = useState({});
+    const { auth } = useContext(AuthContext);
 
     const handleChange = (e) =>{
         setInfo(prev => ({...prev, [e.target.id]: e.target.value}));
@@ -19,7 +21,7 @@ const AddEvent = (props) =>{
         // data.append("file", file);
         // data.append("upload_preset", "upload");
 
-        //add new item
+        //add new event
         try {
 
             // const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/dcc6c33dc/image/upload", data);
@@ -30,7 +32,15 @@ const AddEvent = (props) =>{
                 // img: url,
             };
 
-            await axios.post("http://localhost:7000/events", newEvent);
+            await axios.post(
+                "http://localhost:7000/events",
+                newEvent,
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
             
             props.setOpen(false); 
         } catch (error) {

@@ -6,7 +6,6 @@ import EditEvent from '../../components/EditEvent';
 const Event = () =>{
 
     const { id } = useParams();
-    console.log('use params: ', id);
 
     const { data, loading, error } = useFetch(`http://localhost:7000/events/${id}`);
 

@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../AddUser/Add.css'
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import axios from 'axios';
+import AuthContext from '../../context/AuthProvider';
 
 const AddStand = (props) =>{
 
     const [info, setInfo] = useState({});
+    const { auth } = useContext(AuthContext);
 
     const handleChange = (e) =>{
         setInfo(prev => ({...prev, [e.target.id]: e.target.value}));
@@ -14,13 +16,21 @@ const AddStand = (props) =>{
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
-        //add new item
+        //add new stand
         try {
             const newStand = {
                 ...info
             }
 
-            await axios.post("http://localhost:7000/stands", newStand);
+            await axios.post(
+                "http://localhost:7000/stands", 
+                newStand,
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
             
             props.setOpen(false); 
         } catch (error) {

@@ -4,13 +4,16 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { BiEdit } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
 import useFetch from '../../hooks/useFetch'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import AuthContext from '../../context/AuthProvider';
 
 const DataTable = (props) =>{
     const location = useLocation();
     const path = location.pathname.split("/")[1];
     const [list, setList] = useState([]);
+    const { auth } = useContext(AuthContext);
+
     const {data, loading, error} = useFetch(`http://localhost:7000/${path}`);
 
     useEffect(() =>{
@@ -34,9 +37,15 @@ const DataTable = (props) =>{
     const uniqueIdentifier = Object.keys(list[0])[0];
     
     const handleDelete = async (id) =>{
+        console.log(auth);
         try {
-            // console.log('ID: ', id);
-            await axios.delete(`http://localhost:7000/${path}/${id}`);
+            await axios.delete(`http://localhost:7000/${path}/${id}`, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
             
             setList((prevList) => prevList.filter((item) => item[uniqueIdentifier] !== id));
         } catch (error) {

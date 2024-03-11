@@ -31,7 +31,6 @@ export const NavBar = ({user}) =>{
 
                         {isActive && (
                             <div className="profile-menu">
-                                <div className="dropdown-option"><Link to='#'>Profile</Link></div>
                                 <div className="dropdown-option" onClick={logout}>
                                     <Link to='#'>Logout</Link>
                                 </div>

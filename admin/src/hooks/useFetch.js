@@ -1,38 +1,53 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import AuthContext from '../context/AuthProvider';
 
-const useFetch = (url) =>{
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
+const useFetch = (url) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
-    useEffect(() =>{
-        const fetchData = async () =>{
+    // Access the auth context
+    const { auth } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchData = async () => {
             setLoading(true);
             try {
-                const res = await axios.get(url);
+                // Include Authorization header if accessToken is available
+                const options = auth.accessToken ? { 
+                    headers: { 'Authorization': `Bearer ${auth.accessToken}` } 
+                } : {};
+
+                const res = await axios.get(url, options);
                 setData(res.data);
             } catch (error) {
-                setError(error);
+                setError(true);
+            } finally {
+                setLoading(false);
             }
-            setLoading(false);
         };
         fetchData();
-    }, [url]); //whenever url changes
+    }, [url, auth.accessToken]); // Depend on url and accessToken changes
 
-    //if we need to fetch our data again
-    const reFetch = async () =>{
+    // Similar adjustment for reFetch to include auth if necessary
+    const reFetch = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(url);
+            const options = auth.accessToken ? { 
+                headers: { 'Authorization': `Bearer ${auth.accessToken}` } 
+            } : {};
+
+            const res = await axios.get(url, options);
+            setData(res.data);
         } catch (error) {
-            setError(error);
+            setError(true);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
-    return {data, loading, error, reFetch};
-    
+    return { data, loading, error, reFetch };
 };
 
-export default useFetch
+export default useFetch;

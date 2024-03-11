@@ -76,7 +76,7 @@ const App = () =>{
         />
         <Route
           path="/events"
-          element={<Layout><FullSecure><Events/></FullSecure></Layout>}
+          element={<Layout><LimitedAccess><Events/></LimitedAccess></Layout>}
         />
         <Route
           path="/stands"
@@ -84,7 +84,7 @@ const App = () =>{
         />
         <Route
           path="/tickets"
-          element={<Layout><LimitedAccess><Tickets/></LimitedAccess></Layout>}
+          element={<Layout><FullSecure><Tickets/></FullSecure></Layout>}
         />
         <Route
           path="/users/:id"
@@ -92,7 +92,7 @@ const App = () =>{
         />
         <Route
           path="/events/:id"
-          element={<Layout><FullSecure><Event/></FullSecure></Layout>}
+          element={<Layout><LimitedAccess><Event/></LimitedAccess></Layout>}
         />
         <Route
           path="/stands/:id"

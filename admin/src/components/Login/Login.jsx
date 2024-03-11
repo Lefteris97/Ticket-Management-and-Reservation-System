@@ -28,56 +28,52 @@ const Login = () =>{
         setErrMsg('');
     }, [email, pwd])
 
-    const handleSubmit = async (e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
-            const response = await axios.post('http://localhost:7000/auth/login', JSON.stringify({
-                email:email,
-                password:pwd
-            }), {
-                headers: {'Content-Type' : 'application/json'},
-                withCredentials: true
-            });
-
-            const accessToken = response?.data?.accessToken;
-            const role = response?.data?.role;
-
-            // setAuth({email, pwd, role, accessToken});
-
-            if (role === "admin" || role === "tc") {
-                setAuth({email, pwd, role, accessToken});
-            
-                navigate(from, { replace: true }); // edw einai to thema
-                
-            } else {
-                setErrMsg('Access not allowed');
-                // return;
-            }
-
+            const response = await axios.post(
+                'http://localhost:7000/auth/login',
+                {
+                    email: email,
+                    password: pwd
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+            );
+    
+            const accessToken = response.data.accessToken;
+            const role = response.data.role;
+            const user_id = response.data.user_id;
+    
+            setAuth({ email, pwd, role, user_id, accessToken });
+    
             setEmail('');
             setPwd('');
-
+    
+            navigate(from, { replace: true });
         } catch (error) {
-            console.log('Error:', error);   
-            if (!error?.response){
+            if (!error.response) {
                 setErrMsg('No Server Response');
-            } else if(error.response?.status === 400){
+            } else if (error.response.status === 400) {
                 setErrMsg('Wrong Email or Password');
-            } else if(error.response?.status === 401){
+            } else if (error.response.status === 401) {
                 setErrMsg('Unauthorized');
-            } else{
+            } else {
                 setErrMsg('Login Failed');
             }
-
+    
             errRef.current.focus();
-
+    
             setTimeout(() => {
                 setErrMsg('');
             }, 3000);
         }
-
-    }
+    };
 
     return (
         <div className="login">

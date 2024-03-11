@@ -1,31 +1,11 @@
-// const router = require('express').Router()
-// const standsController = require('../controllers/standsController')
-// const { verifyToken, verifyUser, verifyAdmin, verifyTicketCollector } = require('../utils/verifyToken');
-
-
-// //CREATE
-// router.post("/", verifyAdmin, standsController.createNewStand);
-
-// //GET
-// router.get("/:id", standsController.getStandById);
-
-// //GET ALL
-// router.get("/", standsController.getAllStands);
-
-// //UPDATE
-// router.put("/:id", verifyAdmin, standsController.updateStand);
-
-// //DELETE
-// router.delete("/:id", verifyAdmin, standsController.deleteStand);
-
-// module.exports = router
-
 const router = require('express').Router()
 const standsController = require('../controllers/standsController')
+const verifyToken = require('../utils/verifyToken')
+const verifyRoles = require('../utils/verifyRoles')
 
 
 //CREATE
-router.post("/", standsController.createNewStand);
+router.post("/", verifyToken, verifyRoles('admin'), standsController.createNewStand);
 
 //GET
 router.get("/:id", standsController.getStandById);
@@ -35,9 +15,9 @@ router.get("/of_event/:eventId", standsController.getStandsByEventId);
 router.get("/", standsController.getAllStands);
 
 //UPDATE
-router.put("/:id", standsController.updateStand);
+router.put("/:id", verifyToken, verifyRoles('admin'), standsController.updateStand);
 
 //DELETE
-router.delete("/:id", standsController.deleteStand);
+router.delete("/:id", verifyToken, verifyRoles('admin'), standsController.deleteStand);
 
 module.exports = router

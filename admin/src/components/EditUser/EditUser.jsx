@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './Edit.css'
 import axios from 'axios';
+import AuthContext from '../../context/AuthProvider';
 
 const EditUser = (props) =>{
     const { user } = props;
+    const { auth } = useContext(AuthContext);
     
     // Check if user exists and has at least one item before accessing it
     if (!user || user.length === 0) {
@@ -11,7 +13,9 @@ const EditUser = (props) =>{
     }
 
     const userDetails = user[0];
-    console.log('userdet: ', userDetails);
+
+    const [editedUser, setEditedUser] = useState(userDetails);
+    const [isEditing, setIsEditing] = useState(false);
 
     // Function to handle input changes and update editedUser state
     const handleInputChange = (e) => {
@@ -22,13 +26,20 @@ const EditUser = (props) =>{
         }));
     };
 
-    const [editedUser, setEditedUser] = useState(userDetails);
-
     // Function to handle update button click
     const handleUpdateClick = async () => {
         try {
             console.log('edited user: ', editedUser);
-            const response = await axios.put(`http://localhost:7000/users/${userDetails.user_id}`, editedUser);
+            const response = await axios.put(
+                `http://localhost:7000/users/${userDetails.user_id}`, 
+                editedUser,
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
+            
             console.log('User updated:', response.data);
         } catch (error) {
             console.log(error);
@@ -57,8 +68,10 @@ const EditUser = (props) =>{
                                         className="itemValue"
                                         type="text"
                                         name={key}
-                                        value={editedUser[key] || value} // Display edited value if available
+                                        value={isEditing ? editedUser[key] || "" : value} // Display edited value if available
                                         onChange={handleInputChange}
+                                        onFocus={() => setIsEditing(true)}
+                                        onBlur={() => setIsEditing(false)}
                                     />
                                 </>
                             )}

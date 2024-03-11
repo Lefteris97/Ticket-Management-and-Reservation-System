@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../EditUser/Edit.css'
 import axios from 'axios';
+import AuthContext from '../../context/AuthProvider';
 
 const EditStand = (props) =>{
     const { stand } = props;
+    const { auth } = useContext(AuthContext);
     
     // Check if stand exists and has at least one item before accessing it
     if (!stand || stand.length === 0) {
@@ -11,6 +13,9 @@ const EditStand = (props) =>{
     }
 
     const standDetails = stand[0];
+
+    const [editedStand, setEditedStand] = useState(standDetails);
+    const [isEditing, setIsEditing] = useState(false);
 
     // Function to handle input changes and update editedEvent state
     const handleInputChange = (e) => {
@@ -21,12 +26,19 @@ const EditStand = (props) =>{
         }));
     };
 
-    const [editedStand, setEditedStand] = useState(standDetails);
-
     // Function to handle update button click
     const handleUpdateClick = async () => {
         try {
-            const response = await axios.put(`http://localhost:7000/stands/${standDetails.stand_id}`, editedStand);
+            const response = await axios.put(
+                `http://localhost:7000/stands/${standDetails.stand_id}`, 
+                editedStand,
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.accessToken}`
+                    }
+                }
+            );
+            
             console.log('Stand updated:', response.data);
         } catch (error) {
             console.log(error);
@@ -56,8 +68,10 @@ const EditStand = (props) =>{
                                         className="itemValue"
                                         type="text"
                                         name={key}
-                                        value={editedStand[key] || value}
+                                        value={isEditing ? editedStand[key] || "" : value}
                                         onChange={handleInputChange}
+                                        onFocus={() => setIsEditing(true)}
+                                        onBlur={() => setIsEditing(false)}
                                     />
                                 </>
                             )}
