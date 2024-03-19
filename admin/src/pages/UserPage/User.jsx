@@ -6,7 +6,6 @@ import EditUser from '../../components/EditUser';
 const User = () =>{ 
 
     const { id } = useParams();
-    console.log('use params: ', id);
 
     const { data, loading, error } = useFetch(`http://localhost:7000/users/${id}`);
 
@@ -17,8 +16,6 @@ const User = () =>{
     if (error) {
         return <div>Error: {error.message}</div>;
     }
-
-    console.log(data);
 
     return (
         <div className="user">

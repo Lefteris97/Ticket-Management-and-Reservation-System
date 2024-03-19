@@ -29,7 +29,6 @@ const EditUser = (props) =>{
     // Function to handle update button click
     const handleUpdateClick = async () => {
         try {
-            console.log('edited user: ', editedUser);
             const response = await axios.put(
                 `http://localhost:7000/users/${userDetails.user_id}`, 
                 editedUser,
@@ -39,7 +38,7 @@ const EditUser = (props) =>{
                     }
                 }
             );
-            
+
             console.log('User updated:', response.data);
         } catch (error) {
             console.log(error);

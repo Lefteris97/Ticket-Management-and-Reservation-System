@@ -51,6 +51,10 @@
     padding: 50px;
 }
 
+.rightContent img{
+    height: 80vh;
+}
+
 .circuitMapWrapper{
     justify-content: space-between; 
 }

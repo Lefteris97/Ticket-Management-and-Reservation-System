@@ -11,11 +11,12 @@
   width: 52%;
   height: 15px;
   margin-bottom: 20px;
-  margin-left: 24%;
+  margin-left: auto;
+  margin-right: auto;
 }
   
 .homepage-image{
-  width: 100%;
+  width: 100vw;
   max-width: 2560px;
   height: 500px;
   object-fit: cover;
@@ -30,7 +31,7 @@
   column-gap: 30px;
   row-gap: 20px;
   justify-content: center;
-  margin-bottom: 50px; /* or make a footer */
+  margin-bottom: 50px;
 }
 
 /* For screens smaller than 768px, center each event item */
@@ -46,10 +47,22 @@
     grid-template-areas: "c1"; /* Each item occupies one column */
     grid-auto-columns: 100%; /* Each column takes up the full width */
   }
+
+  .home-line{
+    width: 100vw;
+    margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .events_list {
+    grid-template-areas: "c1 c2"; /* Each item occupies one column */
+    grid-auto-columns: 300px; /* Each column takes up the full width */
+  }
 }
 
 /* For screens larger than 768px, display up to four items per row */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1400px) {
   .events_list {
     grid-template-areas: "c1 c2 c3 c4"; /* Each item occupies its own column */
     grid-auto-columns: 300px; /* Each column has a fixed width */
@@ -62,7 +75,6 @@
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
-  /* outline: auto; */
   text-decoration: none;
 }
 

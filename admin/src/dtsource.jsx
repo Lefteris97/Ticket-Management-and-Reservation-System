@@ -118,17 +118,17 @@ export const eventsColumns = [
   {
     field: 'event_date',
     headerName: 'Date',
-    width: 90
+    width: 120
   },
   {
     field: 'event_time',
     headerName: 'Time',
-    width: 90
+    width: 120
   },
   {
     field: 'total_capacity',
     headerName: 'Capacity',
-    width: 90
+    width: 120
   },
   {
     field: 'flag_icon',
@@ -138,7 +138,7 @@ export const eventsColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithFlag">
-          <img className="cellFlag" src={params.row.flag_icon} alt="flag icon"/>
+          <img className="cellFlag" src={`http://localhost:7000/${params.row.flag_icon}`} alt="flag icon"/>
         </div>
       );
     }
@@ -151,7 +151,7 @@ export const eventsColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithPhoto">
-          <img className="cellPhoto" src={params.row.photo} alt="event photo"/>
+          <img className="cellPhoto" src={`http://localhost:7000/${params.row.photo}`} alt="event photo"/>
         </div>
       );
     }
@@ -164,7 +164,7 @@ export const eventsColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithCircuit">
-          <img className="cellCircuit" src={params.row.circuit_image} alt="flag icon"/>
+          <img className="cellCircuit" src={`http://localhost:7000/${params.row.circuit_map}`} alt="flag icon"/>
         </div>
       );
     }

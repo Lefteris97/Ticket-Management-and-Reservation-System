@@ -26,9 +26,9 @@ exports.getAllUsers = async (req, res, next) =>{
 exports.updateUser = async (req, res, next) =>{
     try {
         let userId = req.params.id;
-        let user_fname = req.body.fname; 
-        let user_lname = req.body.lname;
-        const [updatedUser, _] = await User.updateById(userId, user_fname, user_lname)
+        let { fname, lname, email, password, role } = req.body;
+
+        const [updatedUser, _] = await User.updateById(userId, fname, lname, email, password, role)
 
         res.status(200).json({updatedUser});
     } catch (error) {

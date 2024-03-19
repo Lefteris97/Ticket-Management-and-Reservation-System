@@ -37,7 +37,6 @@ const DataTable = (props) =>{
     const uniqueIdentifier = Object.keys(list[0])[0];
     
     const handleDelete = async (id) =>{
-        console.log(auth);
         try {
             await axios.delete(`http://localhost:7000/${path}/${id}`, 
                 {
@@ -71,41 +70,13 @@ const DataTable = (props) =>{
             )
         }
     }
-
-    // const renderImage = (imgData, isSvg) => {
-    //     if (isSvg) {
-    //         // Directly render SVG using dangerouslySetInnerHTML
-    //         return <div dangerouslySetInnerHTML={{ __html: imgData }} />;
-    //     } else {
-    //         // Render PNG image using an img tag
-    //         return <img src={imgData} alt="icon" style={{ width: '50px', height: 'auto' }} />;
-    //     }
-    // };
-
-    // const columnsWithImageRendering = props.columns.map((column) => {
-    //     if (column.field === 'flag_icon' || column.field === 'photo' || column.field === 'circuit_map') {
-    //         return {
-    //             ...column,
-    //             renderCell: (params) => {
-    //                 const imageData = params.row[column.field]?.data;
-    //                 console.log(column.field)
-    //                 console.log(params.row[column.field]);
-    //                 const isSvg = column.field !== 'photo';
-    //                 return renderImage(imageData, isSvg);
-    //             }
-    //         };
-    //     }
-    //     return column;
-    // });
     
     return (
         <div className="dataTable">
             <DataGrid 
                 className='dataGrid'
-                // rows={props.rows}
                 rows={list}
                 columns={[...props.columns, actionColumn]}
-                // columns={[...columnsWithImageRendering, actionColumn]}
                 initialState={{
                 pagination: {
                     paginationModel: {

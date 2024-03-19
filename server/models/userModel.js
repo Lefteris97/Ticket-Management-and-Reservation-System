@@ -75,15 +75,18 @@ class User{
         return db.execute(q, [id]);
     }
 
-    static updateById(id, fname, lname){
+    static updateById(id, fname, lname, email, password, role){
         let q = `
             UPDATE users
             SET fname = ?,
-                lname = ?
+                lname = ?,
+                email = ?,
+                password = ?,
+                role = ?
             WHERE user_id = ?
         `;
 
-        return db.execute(q, [fname, lname, id]);
+        return db.execute(q, [fname, lname, email, password, role, id]);
     }
 
     static deleteById(id){

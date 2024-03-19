@@ -1,27 +1,3 @@
-// import './Events.css'
-// import { useState } from 'react'
-// import DataTable from '../../components/DataTable'
-// import AddEvent from '../../components/AddEvent'
-// import { eventsColumns } from '../../dtsource'
-// import { eventInputs } from '../../formSource'
-
-// const Events = () =>{
-//     const [open, setOpen] = useState(false);
-
-//     return (
-//         <div className='events'>
-//             <div className="info">
-//                 <h1>Events</h1>
-//                 <button onClick={() => setOpen(true)}>Add New Event</button>
-//             </div>
-//             <DataTable slug="events" columns={eventsColumns}/>
-//             {open && <AddEvent slug="event" columns={eventInputs} setOpen={setOpen}/>}
-//         </div>
-//     )
-// }
-
-// export default Events
-
 import './Events.css'
 import { useState } from 'react'
 import DataTable from '../../components/DataTable'

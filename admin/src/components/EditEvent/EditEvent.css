@@ -1,0 +1,16 @@
+.flagUpload, .photoUpload, .circuitUpload{
+    align-items: center;
+}
+
+.imageContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.imageContainer img{
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+}

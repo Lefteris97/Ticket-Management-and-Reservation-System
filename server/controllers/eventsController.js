@@ -1,10 +1,39 @@
 const Event = require('../models/eventsModel')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null, 'Images')
+    },
+    filename: (req, file, cb) =>{
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
+
+exports.upload = multer({
+    storage: storage,
+    limits: { fieldSize: '5000000' },
+    fileFilter: (req, file, cb) =>{
+        const fileTypes = /jpeg|jpg|png|svg/
+        const mimeType = fileTypes.test(file.mimetype)
+        const extname = fileTypes.test(path.extname(file.originalname))
+
+        if (mimeType && extname){
+            return cb(null, true)
+        }
+        cb('Not supported file format')
+    }
+}).fields([{name: 'flag_icon', maxCount: 1}, {name: 'photo', maxCount: 1}, {name: 'circuit_map', maxCount: 1}])
 
 exports.createNewEvent = async (req, res, next) =>{
     try {
         let event_fields = req.body;
+        let flag_icon = req.files['flag_icon'][0].path;
+        let photo = req.files['photo'][0].path;
+        let circuit_map = req.files['circuit_map'][0].path;
 
-        const event = new Event(event_fields);
+        const event = new Event(event_fields, flag_icon, photo, circuit_map);
 
         await event.save();
 
@@ -15,7 +44,6 @@ exports.createNewEvent = async (req, res, next) =>{
         next(error);
     }
 }
-
 
 exports.getEventById = async (req, res, next) =>{
     try {
@@ -44,7 +72,13 @@ exports.updateEvent = async (req, res, next) =>{
     try {
         let eventId = req.params.id;
         let event_fields = req.body; 
-        const [updatedEvent, _] = await Event.updateById(eventId, event_fields)
+
+        // Check if files exist in the request
+        let flag_icon = req.files['flag_icon'] ? req.files['flag_icon'][0].path : event_fields.flag_icon;
+        let photo = req.files['photo'] ? req.files['photo'][0].path : event_fields.photo;
+        let circuit_map = req.files['circuit_map'] ? req.files['circuit_map'][0].path : event_fields.circuit_map;
+
+        const [updatedEvent, _] = await Event.updateById(eventId, event_fields, flag_icon, photo, circuit_map);
 
         res.status(200).json({updatedEvent});
     } catch (error) {

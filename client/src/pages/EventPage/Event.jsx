@@ -9,25 +9,7 @@ const Event = ({ auth }) => {
     const { eventId } = useParams();
     const { data: eventData, loading: loadingEvents, error: errorEvents } = useFetch(`http://localhost:7000/events/${eventId}`);
     const { data: standsData, loading: loadingStands, error: errorStands, refetch: refetchStandsData } = useFetch(`http://localhost:7000/stands/of_event/${eventId}`);
-    const [flagIconSrc, setFlagIconSrc] = useState('');
-    const [circuitMapSrc, setCircuitMapSrc] = useState('');
     const [selectedStand, setSelectedStand] = useState(null);
-
-    useEffect(() => {
-        if (eventData && eventData.event && eventData.event.length > 0) {
-            const event = eventData.event[0];
-            if (event.flag_icon && event.flag_icon.data) {
-                const flagIconBlob = new Blob([new Uint8Array(event.flag_icon.data)], { type: 'image/svg+xml' });
-                const flagIconUrl = URL.createObjectURL(flagIconBlob);
-                setFlagIconSrc(flagIconUrl);
-            }
-            if (event.circuit_map && event.circuit_map.data) {
-                const circuitMapBlob = new Blob([new Uint8Array(event.circuit_map.data)], { type: 'image/svg+xml' });
-                const circuitMapUrl = URL.createObjectURL(circuitMapBlob);
-                setCircuitMapSrc(circuitMapUrl); 
-            }            
-        }
-    }, [eventData]);
 
     const handleSelectStand = (stand) => {
         if (Object.keys(auth).length === 0) {
@@ -60,7 +42,7 @@ const Event = ({ auth }) => {
             <div className="eventWrapper">
                 <div className="eventTitle">
                     <h1 className="eventName">{event.event_name}</h1>   
-                    <img src={flagIconSrc} alt="Country Flag" className="flagIcon" />
+                    <img src={`http://localhost:7000/${event.flag_icon}`}  alt="Country Flag" className="flagIcon" />
                 </div>
                 <div className="eventInfo">
                     <h2>{event.event_date}</h2>
@@ -86,7 +68,7 @@ const Event = ({ auth }) => {
                         ))}
                     </div>
                     <div className="rightContent">
-                        <img src={circuitMapSrc} alt='Circuit Map' className='circuitMap'/>
+                        <img src={`http://localhost:7000/${event.circuit_map}`} alt='Circuit Map' className='circuitMap'/>
                     </div>
                 </div>
             </div>

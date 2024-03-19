@@ -4,7 +4,7 @@ const verifyToken = require('../utils/verifyToken')
 const verifyRoles = require('../utils/verifyRoles')
 
 //CREATE
-router.post("/", verifyToken, verifyRoles('admin', 'tc'), eventsController.createNewEvent);
+router.post("/", verifyToken, verifyRoles('admin', 'tc'), eventsController.upload, eventsController.createNewEvent);
 
 //GET   
 router.get("/:id", eventsController.getEventById);
@@ -13,7 +13,7 @@ router.get("/:id", eventsController.getEventById);
 router.get("/", eventsController.getAllEvents); 
 
 //UPDATE
-router.put("/:id", verifyToken, verifyRoles('admin', 'tc'), eventsController.updateEvent);
+router.put("/:id", verifyToken, verifyRoles('admin', 'tc'), eventsController.upload, eventsController.updateEvent);
 
 //DELETE
 router.delete("/:id", verifyToken, verifyRoles('admin', 'tc'), eventsController.deleteEvent);

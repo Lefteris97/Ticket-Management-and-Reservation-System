@@ -39,6 +39,8 @@ app.use("/events", eventsRoutes);
 app.use("/stands", standsRoutes);
 app.use("/tickets", ticketsRoute);
 
+app.use("/Images", express.static("./Images"));
+
 //global error handling middleware
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500

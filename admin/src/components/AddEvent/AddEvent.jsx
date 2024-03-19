@@ -6,7 +6,9 @@ import axios from 'axios';
 import AuthContext from '../../context/AuthProvider';
 
 const AddEvent = (props) =>{
-    const [file, setFile] = useState("");
+    const [flagIcon, setFlagIcon] = useState('');
+    const [photo, setPhoto] = useState('');
+    const [circuitMap, setCircuitMap] = useState('');
     const [info, setInfo] = useState({});
     const { auth } = useContext(AuthContext);
 
@@ -17,27 +19,26 @@ const AddEvent = (props) =>{
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
-        // const data = new FormData();
-        // data.append("file", file);
-        // data.append("upload_preset", "upload");
+        const formData = new FormData();
+
+        formData.append('flag_icon', flagIcon);
+        formData.append('photo', photo);
+        formData.append('circuit_map', circuitMap);
+
+        // Append other form data
+        Object.keys(info).forEach(key => {
+            formData.append(key, info[key]);
+        });
 
         //add new event
         try {
-
-            // const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/dcc6c33dc/image/upload", data);
-            // console.log(uploadRes.data);
-            // const { url } = uploadRes.data;
-            const newEvent = {
-                ...info,
-                // img: url,
-            };
-
             await axios.post(
                 "http://localhost:7000/events",
-                newEvent,
+                formData,
                 {
                     headers: {
-                        Authorization: `Bearer ${auth.accessToken}`
+                        Authorization: `Bearer ${auth.accessToken}`,
+                        'Content-Type': 'multipart/form-data'
                     }
                 }
             );
@@ -61,9 +62,8 @@ const AddEvent = (props) =>{
                             </label>
                             <input
                                 type="file"
-                                id="file"
-                                onChange={(e) => setFile(e.target.files[0])}
-                                // style={{ display: "none" }}
+                                id="flag_icon"
+                                onChange={(e) => setFlagIcon(e.target.files[0])}
                             />
                         </div>
                         <div className="photoUpload">
@@ -72,9 +72,8 @@ const AddEvent = (props) =>{
                             </label>
                             <input
                                 type="file"
-                                id="file"
-                                onChange={(e) => setFile(e.target.files[0])}
-                                // style={{ display: "none" }}
+                                id="photo"
+                                onChange={(e) => setPhoto(e.target.files[0])}
                             />
                         </div>
                         <div className="circuitUpload">
@@ -83,9 +82,8 @@ const AddEvent = (props) =>{
                             </label>
                             <input
                                 type="file"
-                                id="file"
-                                onChange={(e) => setFile(e.target.files[0])}
-                                // style={{ display: "none" }}
+                                id="circuit_map"
+                                onChange={(e) => setCircuitMap(e.target.files[0])}
                             />
                         </div>
                     </div>

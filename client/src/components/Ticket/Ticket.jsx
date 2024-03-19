@@ -5,7 +5,6 @@ import jsPDF from 'jspdf';
 import QRCode from 'qrcode.react';
 
 const Ticket = (props) => {
-    const svgBase64 = props.userTicket && props.userTicket.circuit_map ? `data:image/svg+xml;base64,${btoa(String.fromCharCode(...props.userTicket.circuit_map.data))}` : '';
 
     const ticketRef = useRef(null);
 
@@ -43,13 +42,20 @@ const Ticket = (props) => {
                         <h1>{props.userTicket.event_name}</h1>
                         <h2># {props.userTicket.ticket_id}</h2>
                     </div>
-                    <img className='ticketCircuit' src={svgBase64} alt='circuit map'/>
+
+                    <img className='ticketCircuit' src={`http://localhost:7000/${props.userTicket.circuit_map}`}  alt='circuit map'/>
+                    
                     <h2>Stand: {props.userTicket.stand_name}</h2>
                     <h2>Name: {props.userTicket.fname} {props.userTicket.lname}</h2>
-                    
-                    {/* <h2>User Email: {props.userTicket.email}</h2> */}
-                    <QRCode className='QRCode' value={`TicketID: ${props.userTicket.ticket_id}, UserID: ${props.userTicket.user_id}, Event: ${props.userTicket.event_name}, Stand: ${props.userTicket.stand_name}, FName: ${props.userTicket.fname}, LName: ${props.userTicket.lname}`}/> 
-                    {/* User Email: ${props.userEmail} */}
+                
+                    <QRCode className='QRCode' value={`
+                        TicketID: ${props.userTicket.ticket_id}, 
+                        UserID: ${props.userTicket.user_id}, 
+                        Event: ${props.userTicket.event_name}, 
+                        Stand: ${props.userTicket.stand_name}, 
+                        FName: ${props.userTicket.fname}, 
+                        LName: ${props.userTicket.lname}
+                    `}/> 
                 </div>
                 <div className="buttons">
                     <button className="closeButton" onClick={() => props.setSelected(null)}>Close</button>
