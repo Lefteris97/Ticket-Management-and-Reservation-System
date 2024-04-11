@@ -1,4 +1,5 @@
 const User = require('../models/userModel')
+const bcrypt = require('bcrypt');
 
 exports.getUserById = async (req, res, next) =>{
     try {
@@ -28,9 +29,18 @@ exports.updateUser = async (req, res, next) =>{
         let userId = req.params.id;
         let { fname, lname, email, password, role } = req.body;
 
-        const [updatedUser, _] = await User.updateById(userId, fname, lname, email, password, role)
-
-        res.status(200).json({updatedUser});
+        // Check if password is provided and hash it
+        if (password) {
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(password, salt);
+        
+            const [updatedUser, _] = await User.updateById(userId, fname, lname, email, hash, role);
+            res.status(200).json({updatedUser});
+        } else {
+            const [updatedUser, _] = await User.updateById(userId, fname, lname, email, password, role);
+            res.status(200).json({updatedUser});
+        }
+        
     } catch (error) {
         console.log(error);
         next(error);
