@@ -1,3 +1,5 @@
+CREATE DATABASE f1tickets;
+
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `google_id` varchar(255) DEFAULT 'none',
