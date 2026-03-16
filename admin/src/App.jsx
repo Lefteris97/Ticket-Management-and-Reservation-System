@@ -1,0 +1,110 @@
+import './App.css'
+import Header from './components/Header'
+import Login from './components/Login'
+import Menu from './components/Menu'
+import Event from './pages/EventPage/Event'
+import Events from './pages/EventsPage/Events'
+import Home from './pages/HomePage/Home'
+import Stands from './pages/StandsPage/Stands'
+import Tickets from './pages/TicketsPage/Tickets'
+import User from './pages/UserPage/User'
+import Users from './pages/UsersPage'
+import { Navigate, Route, Routes } from "react-router-dom";
+import useAuth from './hooks/useAuth'
+import OnlyAdmins from './components/OnlyAdmins'
+import Stand from './pages/StandPage/Stand'
+import Ticket from './pages/TicketPage/Ticket'
+
+const App = () =>{
+
+  const { auth } = useAuth();
+
+  const isLoggedIn = !!auth.accessToken;
+
+  const LimitedAccess = ({children}) => {
+
+    if(!isLoggedIn){
+      return <Navigate to="/login"/>
+    }
+
+    return children;
+  };
+
+  const FullSecure = ({children}) =>{
+
+    if(!isLoggedIn){
+      return <Navigate to="/login"/>
+    }
+
+    if(auth.role !== 'admin'){
+      return <OnlyAdmins/>
+    }
+
+    return children;
+  };
+
+  const Layout = ({children}) =>{
+    return(
+      <div className="main">
+        <Header/>
+        <div className="container">
+          <div className="menuContainer">
+            <Menu/>
+          </div>
+          <div className="contentContainer">
+            {children}
+          </div>
+        </div>
+      </div>
+    )
+  };
+
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={<Layout><LimitedAccess><Home/></LimitedAccess></Layout>}
+        />
+        <Route
+          path="/login"
+          element={<Login/>}
+        />
+        <Route
+          path="/users"
+          element={<Layout><FullSecure><Users/></FullSecure></Layout>}
+        />
+        <Route
+          path="/events"
+          element={<Layout><LimitedAccess><Events/></LimitedAccess></Layout>}
+        />
+        <Route
+          path="/stands"
+          element={<Layout><FullSecure><Stands/></FullSecure></Layout>}
+        />
+        <Route
+          path="/tickets"
+          element={<Layout><FullSecure><Tickets/></FullSecure></Layout>}
+        />
+        <Route
+          path="/users/:id"
+          element={<Layout><FullSecure><User/></FullSecure></Layout>}
+        />
+        <Route
+          path="/events/:id"
+          element={<Layout><LimitedAccess><Event/></LimitedAccess></Layout>}
+        />
+        <Route
+          path="/stands/:id"
+          element={<Layout><FullSecure><Stand/></FullSecure></Layout>}
+        />
+        <Route
+          path="/tickets/:id"
+          element={<Layout><FullSecure><Ticket/></FullSecure></Layout>}
+        />
+      </Routes>
+    </>
+  )
+}
+
+export default App

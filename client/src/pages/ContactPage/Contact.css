@@ -1,0 +1,23 @@
+.contactForm{
+    margin-top: 90px;
+}
+
+.contactContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 500px;
+}
+
+.phoneInfo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.contactLine{
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 500px;
+}

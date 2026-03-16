@@ -1,0 +1,28 @@
+.itemPage .info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.itemPage .info button{
+    padding: 5px;
+    cursor: pointer;
+}
+
+.infoHeader{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.itemPage .details{
+    font-size: 18px;
+    margin: 20px 0px;
+}
+
+.itemTitle{
+    font-weight: bold;
+    margin-right: 10px;
+    text-transform: capitalize;
+}

@@ -1,0 +1,18 @@
+.header{
+    display: flex;
+    align-items: center;
+}
+
+.header .title{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    /* border-bottom: 2px solid hsl(0, 0%, 81%); */
+    font-weight: bold;
+    font-size: 22.5px;
+}
+
+.logoutBtn{
+    margin-right: 80px;
+    padding: 5px;
+}
